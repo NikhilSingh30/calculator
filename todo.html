@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To-Do List</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+
+  <div class="max-w-xl mx-auto bg-white rounded-lg shadow-md p-6">
+    <h1 class="text-2xl font-bold mb-4">To-Do List</h1>
+
+    <div class="flex gap-2 mb-4">
+      <input type="text" id="taskInput" placeholder="Enter your task" 
+        class="flex-grow border rounded p-2 outline-none focus:ring-2 focus:ring-blue-400" />
+      <button onclick="addTask()" 
+        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add</button>
+    </div>
+
+    <ul id="taskList" class="space-y-2"></ul>
+  </div>
+
+  <script>
+    function addTask() {
+      const input = document.getElementById("taskInput");
+      const taskText = input.value.trim();
+      let task = document.getElementById("taskList");
+      if (taskText === "") return;
+
+
+      let para_all = document.querySelectorAll("#taskList p");
+      for(let para of para_all) {
+        if(para.textContent.toLowerCase() === taskText.toLowerCase()){
+          alert("Task already exists");
+          return;
+        }
+      }
+
+      const li = document.createElement("li");
+      li.className = "flex justify-between items-center bg-gray-100 p-3 rounded";
+
+      const p = document.createElement("p");
+      p.className = "flex-grow text-gray-700";
+      p.textContent = taskText;
+
+      const editBtn = document.createElement("button");
+      editBtn.textContent = "Edit";
+      editBtn.className = "bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded mx-1";
+      editBtn.onclick = () => {
+        const newTask = prompt("Edit your task:", p.textContent);
+        if (newTask !== null && newTask.trim() !== "") {
+          p.textContent = newTask.trim();
+        }
+      };
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Delete";
+      deleteBtn.className = "bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded";
+      deleteBtn.onclick = () => li.remove();
+
+      li.appendChild(p);
+      li.appendChild(editBtn);
+      li.appendChild(deleteBtn);
+
+      task.appendChild(li);
+      input.value = "";
+    }
+  </script>
+
+</body>
+</html>
