@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="flex justify-center items-center h-screen w-full">
+    <div class="main size-150 bg-amber-100  border-1 border-amber-200 rounded-2xl shadow-amber-200 shadow-2xl">
+
+        <div class="h-20 relative border-amber-100">
+           <p class="result absolute bottom-0 right-0 pr-5 text-4xl">0</p> 
+        </div>
+
+        <div class="mt-5 flex justify-between  text-white text-2xl">
+            <button class="size-20  rounded-full bg-amber-700">AC</button>
+             <button class="size-20  rounded-full bg-amber-700">DEL</button>
+              <button class="size-20  rounded-full bg-amber-700">%</button>
+               <button class="size-20  rounded-full bg-amber-700">()</button>
+        </div>
+        <div class="mt-5 flex justify-between text-white text-2xl"> 
+            <button class="size-20  rounded-full bg-amber-700">7</button>
+            <button class="size-20  rounded-full bg-amber-700">8</button>
+            <button class="size-20  rounded-full bg-amber-700">9</button>
+            <button class="size-20  rounded-full bg-amber-700">/</button>
+        </div>
+        <div class="mt-5 flex justify-between text-white text-2xl"> 
+            <button class="size-20  rounded-full bg-amber-700">4</button>
+            <button class="size-20  rounded-full bg-amber-700">5</button>
+            <button class="size-20  rounded-full bg-amber-700">6</button>
+            <button class="size-20  rounded-full bg-amber-700">*</button>
+        </div>
+        <div class="mt-5 flex justify-between text-white text-2xl"> 
+            <button class="size-20  rounded-full bg-amber-700">1</button>
+            <button class="size-20  rounded-full bg-amber-700">2</button>
+            <button class="size-20  rounded-full bg-amber-700">3</button>
+            <button class="size-20  rounded-full bg-amber-700">-</button>
+        </div>
+        <div class="mt-5 flex justify-between text-white text-2xl"> 
+            <button class="size-20  rounded-full bg-amber-700">0</button>
+            <button class="size-20  rounded-full bg-amber-700">.</button>
+            <button class="size-20  rounded-full bg-amber-700">=</button>
+            <button class="size-20  rounded-full bg-amber-700">+</button>
+        </div>
+
+    </div>
+    <script>
+        let buttons = document.querySelectorAll('button');
+        let arr = Array.from(buttons);
+        let res = document.querySelector('.result');
+        let string = "";
+        arr.forEach(button => {
+            button.addEventListener("click", (e) =>{
+                if(e.target.innerHTML === "="){
+                    string = eval(string);
+                    res.innerHTML = string;
+                }else if(e.target.innerHTML === "AC"){
+                    string = "";
+                    res.innerHTML = string;
+                }else if(e.target.innerHTML === "DEL"){
+                    string = string.substring(0, string.length-1)
+                    res.innerHTML = string
+                }else{
+                    string += e.target.innerHTML;
+                    res.innerHTML = string;
+                }
+            })
+        })
+
+    </script>
+    
+</body>
+</html>
