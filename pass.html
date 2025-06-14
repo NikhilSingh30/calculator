@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passwoed Generator</title>
+     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    <div class="main h-screen w-full bg-linear-65 from-purple-500 to-pink-500 flex justify-center items-center">
+        <div class="h-[520px] w-96 bg-linear-to-r/decreasing from-indigo-500 to-teal-400 shadow-3xl rounded-2xl shadow-gray-300 shadow-2xl">
+            <p class="text-2xl font-semibold text-white ml-8 mt-5">Password Generator</p>
+            <input type="text" disabled class="h-15 w-80 bg-white ml-8 mt-5 text-xl text-black pl-4" id="Password">
+            <input type="range" min="1" max="20" value="8" class="h-15 w-80 bg-white ml-8 mt-2  " id = "input_slider">
+            <div class="flex mt-0 ml-8 justify-between">
+                <p class="text-2xl text-amber-50 font-bold">Password Length</p>
+                <span class="length text-2xl text-amber-50 font-semibold mr-8">8</span>
+            </div>
+
+            <div class="ml-8 mt-5 flex justify-between">
+                <label for="lowercase" class="text-xl text-amber-50 font-bold">Include lowercase Letters (a-z)</label>
+                <input type="checkbox" name="lowercase" id="lowercase" class="border-none mr-8 w-6">
+            </div>
+            <div class="ml-8 mt-5 flex justify-between">
+                <label for="uppercase" class="text-xl text-amber-50 font-bold">Include uppercase Letters (A-Z)</label>
+                <input type="checkbox" name="uppercase" id="uppercase" class="border-none mr-8 w-6">
+            </div>
+            <div class="ml-8 mt-5 flex justify-between">
+                <label for="number" class="text-xl text-amber-50 font-bold">Include Numbers (0-9)</label>
+                <input type="checkbox" name="number" id="number" class="border-none mr-8 w-6">
+            </div>
+            <div class="ml-8 mt-5 flex justify-between">
+                <label for="symbol" class="text-xl text-amber-50 font-bold">Include Symbols (@)</label>
+                <input type="checkbox" name="symbol" id="symbol" class="border-none mr-8 w-6">
+            </div>
+            <button class="ml-8 mt-5 text-xl text-white font-semibold bg-gray-400  w-80 h-10" id="generatebtn">Generate Password</button>
+
+        </div>
+
+    </div>
+    <script>
+        let ans = document.querySelector("#Password");
+        let span = document.querySelector("span");
+        let slider = document.querySelector("#input_slider");
+        let low1 = document.querySelector("#lowercase");
+        let up1 = document.querySelector("#uppercase");
+        let num1 = document.querySelector("#number");
+        let sym1 = document.querySelector("#symbol");
+        span.innerHTML = slider.value;
+        // showing input slider value.......
+        slider.addEventListener("input", ()=>{
+            span.innerHTML = slider.value;
+        })
+
+        let gbtn = document.querySelector("#generatebtn");
+        gbtn.addEventListener("click", ()=>{
+            console.log("button clicked")
+            let passwordLength = slider.value;
+            let ans1 = "";
+            let low = "abcdefghijklmnopqrstuvwxyz";
+            let up = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            let num = "0123456789";
+            let sym = "!@#$%^&*()_";
+            let allchars = "";
+            if(low1.checked){
+                allchars += low;
+            }
+            if(up1.checked){
+                allchars += up;
+            }
+            if(num1.checked){
+                allchars += num;
+            }
+            if(sym1.checked){
+                allchars += sym;
+            }
+
+
+            
+            let i = 1;
+            while(i < passwordLength){
+                ans1 += allchars.charAt(Math.floor(Math.random() * allchars.length));
+                i++;
+            }
+            ans.value = ans1;
+            console.log(ans1);
+            
+
+        })
+    </script>
+    
+</body>
+</html>
